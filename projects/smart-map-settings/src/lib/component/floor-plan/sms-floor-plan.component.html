@@ -1,0 +1,135 @@
+<div *ngIf="isBusy">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="">
+    <div class="dia-header" *ngIf="dataSource.data.length > 0">
+        <div class="action-button-right ">
+        
+            <button (click)="initialise()" mat-icon-button [matMenuTriggerFor]="addMenu"  mat-button color="primary" title="Add floor">
+                <i class="fa fa-plus-circle"></i>
+            </button>
+            <button mat-icon-button mat-button color="primary" title="Save floor detail" 
+               (click)="saveFloorPlan()"  >
+                <i class="fa fa-check"></i>
+            </button>
+        </div>
+    </div>
+    
+    <ng-container *ngIf="dataSource.data.length === 0">
+        <p class="gp-center">To add the floor, Click <button (click)="initialise()" mat-icon-button [matMenuTriggerFor]="addMenu" mat-button color="primary" title="Add floor">
+            <mat-icon><i class="fa fa-plus-circle"></i></mat-icon>
+        </button></p>
+    </ng-container>
+    <ng-container *ngIf="dataSource.data.length > 0">
+        <table mat-table  [dataSource]="dataSource" matSort class="gp-floor-table">
+                
+            <ng-container matColumnDef="level">
+                <mat-header-cell  *matHeaderCellDef mat-sort-header> Floor level </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.level}} </mat-cell>
+            </ng-container>
+            
+            <!-- <ng-container matColumnDef="file">
+                <mat-header-cell *matHeaderCellDef> File name </mat-header-cell>
+                <mat-cell *matCellDef="let row"> {{row.file.name}} </mat-cell>
+            </ng-container> -->
+
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                <mat-cell *matCellDef="let row"> 
+                    <p *ngIf="row.status === undefined"> Initial </p>
+                    <p *ngIf="row.status !== undefined"> {{row.status}} </p>
+                </mat-cell>
+                </ng-container>
+            
+            <ng-container matColumnDef="preview" stickyEnd>
+                <mat-header-cell *matHeaderCellDef> Geography </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"> 
+                    <button mat-icon-button (click)="previewFloor({index: i, row: row, coordinates: coordinates})"
+                        mat-button color="primary" title="setup/preview Markers and Geofences"
+                        [disabled]="row.status === 'Marked for deletion' ">
+                        <i class="fa fa-globe"></i>
+                    </button>
+                </mat-cell>
+                </ng-container>
+
+            <ng-container matColumnDef="edit" stickyEnd>
+                <mat-header-cell *matHeaderCellDef> Floor Plan </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"> 
+                    <button mat-icon-button [matMenuTriggerFor]="editMenu" [matMenuTriggerData]="{index: i}" (click)="initialise()"
+                        mat-button color="primary" title="Floor Plan" [disabled]="row.status === 'Marked for deletion' ">
+                        <i class="fa fa-upload"></i>
+                    </button>
+                </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="delete" >
+                <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"><button mat-button color="warn" title="Delete" 
+                    (click)="deleteFloorPlan(i, row.id)" [disabled]="row.status === 'Marked for deletion' "> 
+                        <i class="fa fa-minus-circle"></i>
+                    </button>
+                </mat-cell>
+                </ng-container>
+
+            <ng-container matColumnDef="revert">
+                <mat-header-cell *matHeaderCellDef> Revert </mat-header-cell>
+                <mat-cell *matCellDef="let row; let i = index"><button mat-button color="primary" title="Revert changes" (click)="undoFloorPlan(i, row.id, row.level)"
+                    [disabled]="row.status === 'New' || row.status === undefined || row.status === 'Image alligned' || row.status === 'Markers touched' || row.status === 'Geofences touched'"> 
+                        <i class="fa fa-undo"></i>
+                    </button>
+                </mat-cell>
+                </ng-container>
+            
+            <!-- Header and Row Declarations -->
+            <mat-header-row *matHeaderRowDef="tableColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: tableColumns"></mat-row>
+        </table>
+    </ng-container>
+
+    <mat-menu #editMenu="matMenu">
+        <ng-template matMenuContent let-index="index">
+            <form (ngSubmit)="editFloorPlan(index, editFile.files)" [formGroup]="floorEditConfigForm">
+                <div class="gp-input-group">
+                    <label for="floorMapImage" >Floor Image:</label>
+                    <input type="file" id="file" class="gp-max" #editFile accept=".png,.jpeg,.jpg,.svg,.json"
+                        (click)="$event.stopPropagation()" (change)="validateFile(editFile, floorEditConfigForm)"/>
+                        <input type="hidden" name="fileHidden" formControlName="file"/>
+                        <p class="gp-sms-error" *ngIf="error"> {{errorMessage}} </p>
+                </div>
+                
+                <div class="gp-input-group gp-center">
+                    <button type="submit" mat-flat-button color="primary" [disabled]="!floorEditConfigForm.valid"> 
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </form>
+        </ng-template>
+    </mat-menu>
+
+    <mat-menu #addMenu="matMenu">
+        <ng-template matMenuContent >
+            <form  (ngSubmit)="addFloorPlan(addlevel.value, null)" [formGroup]="floorAddConfigForm">
+                <div class="gp-input-group">
+                    <label for="level" >Floor Level:</label>
+                    <input type="number"  id="level" class="gp-max" #addlevel
+                        (click)="$event.stopPropagation()" 
+                        formControlName="level" placeholder="Floor Number"  /> 
+                </div>
+
+               <!--  <div class="gp-input-group">
+                    <label for="file" >Floor Image:</label>
+                    <input type="file" id="file" class="gp-max" #addfile accept=".png,.jpeg,.jpg"
+                        (click)="$event.stopPropagation()" (change)="validateFile(addfile, floorAddConfigForm)" />
+                        <p class="gp-sms-error" *ngIf="error"> File type should be image </p>
+                        <input type="hidden" name="fileHidden" formControlName="file"/>
+                </div> -->
+                
+                <div class="gp-input-group gp-center">
+                    <button type="submit" mat-flat-button color="primary" [disabled]="!floorAddConfigForm.valid"> 
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </form>
+        </ng-template>
+    </mat-menu>
+</div>

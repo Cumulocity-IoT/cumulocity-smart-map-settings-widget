@@ -1,0 +1,23 @@
+
+
+.gp-button-center{
+    text-align: right;
+}
+
+.gp-sms-moveright{
+    float: right;
+}
+.field-container {
+    display: flex;
+    flex-direction: column;
+}
+.geofence-field-item{
+    flex-grow: initial;
+}
+.geofence-field-item mat-form-field {
+  width: 100%;
+}
+.autoOptions {
+  font-size: 12px;
+  height: 25px;
+}

@@ -1,0 +1,44 @@
+.action-button-right{
+    float: right;
+}
+
+.dia-header{
+    display: flex;
+}
+
+.dia-header-size{
+    width: 90%;
+}
+
+.gp-floor-table{
+    border: 2px solid black;
+}
+
+.gp-row-back{
+    background-color: blanchedalmond;
+}
+
+::ng-deep .mat-sort-header-arrow{
+    display: none!important;
+}
+
+
+::ng-deep .my-menu {
+    width: 450px;
+    height: 300px;
+    overflow: hidden!important;
+    max-width: 500px!important;
+}
+
+.gp-sms-error {
+    color: red;
+}
+
+th.mat-sort-header-sorted {
+    color: black;
+  }
+
+table {
+    width: 100%;
+    background: #efefef!important;
+}

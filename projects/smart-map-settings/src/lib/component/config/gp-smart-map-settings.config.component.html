@@ -1,0 +1,37 @@
+<div class="form-group">
+    <c8y-form-group>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="GeoSearchAPI" class="col-sm-4 control-label">Location Search URL:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.geoSearchAPI" id="GeoSearchAPI" class="form-control"
+                  placeholder="configure geo search API">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="latField" class="col-sm-4 control-label">Latitude Field:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.latField" id="latField" class="form-control"
+                  placeholder="response.lat">
+              </div>
+            </div>
+          </div> 
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-horizontal">
+            <div class="col-sm-12 form-group">
+              <label for="lngField" class="col-sm-4 control-label">Longitude Field:</label>
+              <div class="col-sm-8">
+                <input type="text" [(ngModel)]="config.lngField" id="lngField" class="form-control"
+                  placeholder="response.lng">
+              </div>
+            </div>
+          </div>
+        </div>
+    </c8y-form-group>
+</div>

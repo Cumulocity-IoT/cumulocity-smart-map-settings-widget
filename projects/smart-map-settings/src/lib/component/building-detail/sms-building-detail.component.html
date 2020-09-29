@@ -1,0 +1,77 @@
+<div *ngIf="isBusy">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="action-button-right " *ngIf="dataSource.data.length > 0">
+      <button mat-button color="primary" (click)="openDialog()"title="Add geography"> <i class="fa fa-plus-circle"></i></button>
+</div>
+<div>
+<div class="text-pad" *ngIf="dataSource.data.length === 0">
+  <h3 class="gp-center">No Data to show.
+      To add, Click <button mat-button color="primary" (click)="openDialog()" title="Add geography">
+     <i class="fa fa-plus-circle"></i>
+    </button>
+  </h3>
+  </div>
+<div *ngIf="dataSource.data.length > 0">
+ <table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       >
+
+  <ng-container matColumnDef="id">
+    <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > ID </th>
+    <td class="gp-sms-change-color" mat-cell *matCellDef="let row"> {{row.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="name">
+    <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > Name </th>
+    <td class="gp-sms-change-color" mat-cell *matCellDef="let row"> {{row.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="assetType">
+    <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > Asset Type </th>
+    <td class="gp-sms-change-color" mat-cell *matCellDef="let row"> {{row.assetType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+   <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > Location </th>
+   <td class="gp-sms-change-color" mat-cell *matCellDef="let row"> {{row.location}} </td>
+ </ng-container>
+
+  <ng-container matColumnDef="floorsAvailable">
+   <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > Total floors </th>
+   <td class="gp-sms-change-color" mat-cell *matCellDef="let row"> {{row.levels.length}} </td>
+ </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > </th>
+    <td class="gp-sms-change-color" mat-cell *matCellDef="let row"><button mat-button color="warn" title="Delete"
+        (click)="$event.stopPropagation();deleteDialog(row)"> <i
+          class="fa fa-minus-circle"></i></button></td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+   <th class="gp-sms-change-color"mat-header-cell *matHeaderCellDef > </th>
+   <td class="gp-sms-change-color" mat-cell *matCellDef="let row"><button mat-button color="blue" title="Edit" (click)="$event.stopPropagation();editBuildingConfig(row)"> <i
+         class="fa fa-pencil-square-o"></i></button></td>
+ </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="addFloors">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+           <lib-sms-floor-plan [input]="element" (saved)="loadFloorData()">
+          </lib-sms-floor-plan>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns" ></tr>
+  <tr mat-row *matRowDef="let element; columns: displayedColumns;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['addFloors']" class="example-detail-row"></tr>
+</table>
+</div></div>

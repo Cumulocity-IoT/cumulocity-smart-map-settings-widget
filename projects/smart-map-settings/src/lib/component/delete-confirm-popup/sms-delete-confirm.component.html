@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Delete Geography</h1>
+<div mat-dialog-content>
+  <p>You are about to delete Geography "{{data.record.name}}".</p>
+  <p>operation is irreversible. Do you want to proceed?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data.record" cdkFocusInitial>Ok</button>
+</div>
