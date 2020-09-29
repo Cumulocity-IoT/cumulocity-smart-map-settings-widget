@@ -1,7 +1,7 @@
 # Smart Map settings widget for Cumulocity
 This widget 'Smart map settings' is created using Anuglar Library and can be deployed in App Builder and Cockpit as a cumulocity widget. It allows you to mark and create a Geography on specified location. After the Geography is created, it allows to create floors, Geofences and device positioning. This widget is used as configuration for Smart Map widget
 
-![](URL)
+![](https://user-images.githubusercontent.com/32765455/94546270-465a2080-026b-11eb-87f0-f99b739931c0.png)
 
 ## What's new?
 *  **Location Search:** Support for Location Search to find any location across globe.
@@ -53,7 +53,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 	npm i leaflet-draw@1.0.4 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 leaflet.markercluster@1.4.1
 	``` 
 
-2. Grab the Smart Map settings **[Latest Release Binary](URL)**.
+2. Grab the Smart Map settings **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/gp-smart-map-settings-1.0.0.tgz)**.
 
 3. Install the Binary file in app builder. 
 
@@ -61,7 +61,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
     npm i <binary file path>/gp-smart-map-settings-*.*.*.tgz
 	```
 
-4. Copy smart-map.css file [from here](URL) and paste it at  /cumulocity-app-builder/ui-assets/
+4. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smart-map.css) and paste it at  /cumulocity-app-builder/ui-assets/
 
     **Note:** Ignore this step is already done as part Smart-Map Installation. 
 
@@ -113,7 +113,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 	npm i leaflet-draw@1.0.4 leaflet2@npm:leaflet@^1.6.0 @angular/material@8.2.3 leaflet.markercluster@1.4.1
 	``` 
 
-2. Grab the Smart Map settings **[Latest Release Binary](URL)**.
+2. Grab the Smart Map settings **[Latest Release Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/gp-smart-map-settings-1.0.0.tgz)**.
 
 3.  Install the Binary file in your project.
 
@@ -121,7 +121,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
     npm i <binary file path>/gp-smart-map-settings-*.*.*.tgz
 	```
 
-4. Copy smart-map.css file [from here](URL) and paste it at  /cumulocity-app/branding/ (Please ignore this step if it is already exist).
+4. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smart-map.css) and paste it at  /cumulocity-app/branding/ (Please ignore this step if it is already exist).
 
 > **Note** If you don't find branding folder then please follow [Cumulocity Branding](https://cumulocity.com/guides/web/angular/#branding)
 
@@ -184,7 +184,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 2. Change directory:
 
     ```
-    cd smart-map-settings
+    cd cumulocity-smart-map-settings-widget
     ```
 
 3. (Optional) Checkout a specific version:
