@@ -19,7 +19,10 @@
 import { Component, OnInit, isDevMode, ViewChild, Input } from '@angular/core';
 import { WidgetConfig, ConfigCoordinates, BuildingConfig } from '../../common/interfaces/widgetConfig.interface';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
-import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
+//import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
+import {MatTableDataSource} from '@angular/material/table';
+import {MatSort} from '@angular/material/sort';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { GPSmsMapDialogComponent } from '../map-dialog/sms-map-dialog.component';
 import { FetchClient, IFetchOptions } from '@c8y/client';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -46,8 +49,8 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     dataSource = new MatTableDataSource<WidgetConfig>([]);
     isBusy  = false;
     dialogConfig = new MatDialogConfig();
-    @ViewChild(MatSort, {static: true})
-    set sort(v: MatSort) { this.dataSource.sort = v; }
+     @ViewChild(MatSort, {static: true})
+    set sort(v: MatSort) { this.dataSource.sort = v; } 
     displayedColumns: string[] = ['id', 'name', 'assetType', 'location', 'floorsAvailable', 'delete', 'edit'];
     expandedElement: any;
     private _config: any = {};

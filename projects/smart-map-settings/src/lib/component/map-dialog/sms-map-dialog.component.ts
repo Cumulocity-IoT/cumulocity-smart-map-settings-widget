@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Component, OnInit, isDevMode, AfterViewInit,
      ComponentFactoryResolver, Injector, ApplicationRef,
      NgZone, ComponentRef, Input, Inject, OnDestroy } from '@angular/core';
@@ -307,7 +307,7 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
                                 }).addTo(_this.map);
                                 const defaultIcon = L.icon({
                                     iconUrl: 'marker-icon.png',
-                                    shadowUrl: 'marker-shadow.png',
+                                //    shadowUrl: 'marker-shadow.png',
                                     iconSize: [15, 20],
                                     iconAnchor: [5, 20]
                                 });

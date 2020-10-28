@@ -17,7 +17,8 @@
  */
 
 import { OnInit, Component, Input, Inject, ViewChild, isDevMode, Output, EventEmitter } from '@angular/core';
-import { MatSort, MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
+import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
 import { HttpClient } from '@angular/common/http';
@@ -53,7 +54,7 @@ export class GPFloorDialogComponent implements OnInit {
     errorMessage = '';
     isBusy = false;
 
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
+   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     constructor(
         private formBuilder: FormBuilder,

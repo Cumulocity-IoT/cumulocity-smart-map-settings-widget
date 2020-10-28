@@ -15,23 +15,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { NgModule } from '@angular/core';
 import { Commonc8yService } from './common/c8y/commonc8y.service';
 import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
+
+import '~styles/index.css';
+
+
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { GPFloorPlanSettingsComponent } from './component/building-detail/sms-building-detail.component';
 import { GPFloorPlanSettingsConfigComponent } from './component/config/gp-smart-map-settings.config.component';
-import { MatAutocompleteModule,
-  MatPaginatorModule, MatFormFieldModule, MatInputModule,
-  MatProgressBarModule, MatButtonModule, MatSortModule, MatSlideToggleModule,
-  MatDialogModule, MatSelectModule, MatButtonToggleModule, MatDatepickerModule,
-  MatNativeDateModule, MatMenuModule, MatIconModule
-} from '@angular/material';
+
+
 import { MatTableModule } from '@angular/material/table';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material/select'; 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatButtonModule } from '@angular/material/button';
+
 import { GPSmsMapDialogComponent } from './component/map-dialog/sms-map-dialog.component';
-import { AngularResizedEventModule } from 'angular-resize-event';
 import { BuildingEntryPopupComponent } from './component/building-entry-popup/sms-building-entry-popup.component';
 import { GPFloorDialogComponent } from './component/floor-plan/sms-floor-plan.component';
 import { MarkerDetailPopupComponent } from './component/marker-detail-popup/sms-marker-detail-popup.component';
@@ -40,6 +49,8 @@ import { GeofenceDetailPopupComponent } from './component/geofence-detail-popup/
 import { LocationSearchService } from './common/locationSearch.service';
 import { ImageRotateService } from './common/imageRotate.service';
 import { GPDeleteConfirmComponent } from './component/delete-confirm-popup/sms-delete-confirm.component';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [ BuildingEntryPopupComponent, MarkerDetailPopupComponent, GeofenceDetailPopupComponent,
@@ -48,26 +59,29 @@ import { GPDeleteConfirmComponent } from './component/delete-confirm-popup/sms-d
   imports: [
 
     CoreModule,
-    MatTableModule,
-    MatPaginatorModule,
-    BrowserAnimationsModule,
+  //  BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSortModule,
-    MatButtonModule,
-    MatDialogModule,
     MatSelectModule,
+    MatTableModule,
     MatProgressBarModule,
-    MatButtonToggleModule,
+    MatDialogModule,
     MatMenuModule,
     MatIconModule,
+    MatSortModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    /* 
+    MatPaginatorModule,  
+  
     MatDatepickerModule,
     MatNativeDateModule,
-    MatSlideToggleModule,
-    AngularResizedEventModule,
-    MatAutocompleteModule,
-    FormsModule ,
-    ReactiveFormsModule,
+    MatSlideToggleModule, */
+    /* AngularResizedEventModule,
+     */
   ],
   exports: [
     GPFloorPlanSettingsComponent, GPFloorPlanSettingsConfigComponent, GPSmsMapDialogComponent, GPDeleteConfirmComponent],

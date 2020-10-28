@@ -1,0 +1,12 @@
+{
+  "name": "Smart Map Settings Runtime Widget",
+  "contextPath": "smartmap-settings-runtime-widget",
+  "key": "smartmap-settings-runtime-widget-application-key",
+  "contentSecurityPolicy": "default-src 'self'; ",
+  "icon": {
+    "class": "fa fa-cogs"
+  },
+  "manifest": {
+    "noAppSwitcher": true
+  }
+}

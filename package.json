@@ -1,9 +1,9 @@
 {
   "name": "gp-smart-map-settings",
-   "version": "1.0.0",
-   "description": "The Smart Map Setting widget help user to setup geography, indoor floor plan, svg images, GeoJSOn, Geofences for single/multiple floors. This will be used by Smart Map",
-   "author": "Darpankumar Lalani - Software AG, Global Presales",
-   "license": "Apache 2.0",
+  "version": "1.0.0",
+  "description": "The Smart Map Setting widget help user to setup geography, indoor floor plan, svg images, GeoJSOn, Geofences for single/multiple floors. This will be used by Smart Map",
+  "author": "Darpankumar Lalani - Software AG, Global Presales",
+  "license": "Apache 2.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -15,7 +15,8 @@
     "buildMinor": "cd projects/smart-map-settings && npm version minor && ng build smart-map-settings && cd ../../ && cd dist/gp-smart-map-settings && npm pack && move *.tgz ../",
     "buildMajor": "cd projects/smart-map-settings && npm version major && ng build smart-map-settings && cd ../../ && cd dist/gp-smart-map-settings && npm pack && move *.tgz ../",
     "serve": "ng build smart-map-settings && npm i dist/smart-map-settings && ng s",
-    "copyAssets": "ncp ./projects/smart-map-settings/src/lib/assets/ ./dist/smart-map-settings/assets"
+    "copyAssets": "ncp ./projects/smart-map-settings/src/lib/assets/ ./dist/smart-map-settings/assets",
+    "runtime": "gulp --gulpfile ./runtime/gulpfile.js"
   },
   "dependencies": {
     "@angular/animations": "~8.2.14",
@@ -59,11 +60,23 @@
     "karma-jasmine": "~2.0.1",
     "karma-jasmine-html-reporter": "^1.4.0",
     "ncp": "^2.0.0",
-    "ng-packagr": "^5.3.0",
+    "ng-packagr": "^9.1.1",
     "protractor": "^5.4.4",
     "ts-node": "~7.0.0",
     "tsickle": "^0.36.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "css-loader": "^3.5.3",
+    "del": "^5.1.0",
+    "delay": "^4.3.0",
+    "fs-extra": "^9.0.0",
+    "gulp": "^4.0.2",
+    "gulp-filter": "^6.0.0",
+    "gulp-replace": "^1.0.0",
+    "gulp-zip": "^5.0.1",
+    "url-loader": "^4.1.0",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-external-import": "^2.2.3"
   }
 }
