@@ -15,18 +15,12 @@ function clean() {
 const compile = series(
     function buildAngularLibrary() { return ngPackagr.build({project: './ng-package.json'}) },
     function separateWebpackBuildSrc() { return fs.copy('./dist/widget-library/fesm5', './dist/bundle-src') },
-    function replaceStylePath() {
-        return src('./dist/widget-library/**/*')
-            .pipe(replace(/~styles/g, function () {
-                return path.relative(this.file.dirname, './dist/widget-library/styles').replace(/\\/g, '/')
-            }))
-            .pipe(replace(/~styles/g, function () {
-                return path.relative(this.file.dirname, './dist/widget-library/styles').replace(/\\/g, '/')
-            }))
-            .pipe(dest('./dist/widget-library/'))
-    },
-    async function packLibrary() { return execSync("npm pack ./widget-library", { cwd: './dist', stdio: 'inherit' }) }
-)
+   /*  function replaceImagePath() {
+        return src(['./dist/bundle-src/custom-widget.js'])
+        .pipe(replace('marker-icon.png', '~styles/marker-icon.png'))
+        .pipe(dest('./dist/bundle-src'));
+    }, */
+  )
 
 const bundle = series(
     async function webpackBuild() { return execSync("npx webpack", {stdio: 'inherit'}) },

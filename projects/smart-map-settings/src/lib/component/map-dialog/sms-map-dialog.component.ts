@@ -33,7 +33,7 @@ import { FormControl } from '@angular/forms';
 import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { LocationSearchService } from '../../common/locationSearch.service';
 import { ImageRotateService } from '../../common/imageRotate.service';
-
+import * as MarkerImage from '../../common/marker-icon';
 export interface GPSettingsDialogInterface {
     edit ?: boolean;
     preview ?: boolean;
@@ -306,7 +306,7 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
                                     interactive: true,
                                 }).addTo(_this.map);
                                 const defaultIcon = L.icon({
-                                    iconUrl: 'marker-icon.png',
+                                    iconUrl: MarkerImage.markerIcon,
                                 //    shadowUrl: 'marker-shadow.png',
                                     iconSize: [15, 20],
                                     iconAnchor: [5, 20]
@@ -337,8 +337,8 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
                                     interactive: true,
                                 }).addTo(_this.map);
                                 const defaultIcon = L.icon({
-                                    iconUrl: 'marker-icon.png',
-                                    shadowUrl: 'marker-shadow.png',
+                                    iconUrl: MarkerImage.markerIcon,
+                                //    shadowUrl: 'marker-shadow.png',
                                     iconSize: [25, 30],
                                     iconAnchor: [0, 40]
                                 });
