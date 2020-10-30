@@ -1,4 +1,5 @@
-# Smart Map Settings Widget for Cumulocity
+# Smart Map Settings Widget for Cumulocity[<img width="35" src="https://user-images.githubusercontent.com/67993842/97668428-f360cc80-1aa7-11eb-8801-da578bda4334.png"/>](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smartmap-settings-runtime-widget-1.0.0.zip)
+
 This widget 'Smart map settings' is created using Anuglar Library and can be deployed in App Builder and Cockpit as a cumulocity widget. It allows you to mark and create a Geography on specified location. After the Geography is created, it allows to create floors, Geofences and device positioning. This widget is used as configuration for Smart Map widget
 
 ![](https://user-images.githubusercontent.com/32765455/94546270-465a2080-026b-11eb-87f0-f99b739931c0.png)
@@ -19,7 +20,14 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 * Rotate and positioned image using smart rotation point
 * Devices can be marked on the map at floor level.
   
+  
 ## Installation
+
+### Runtime Widget Deployment?
+
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smartmap-settings-runtime-widget-1.0.0.zip) and follow runtime deployment instruction from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+
+### Installation of widget through Appbuilder or Cockipt Deployment?
 
 **Supported Cumulocity Environments:** 
 
