@@ -25,7 +25,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 
 ### Runtime Widget Deployment?
 
-* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smartmap-settings-runtime-widget-1.0.0.zip) and follow runtime deployment instruction from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
+* This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/1.0.0/smartmap-settings-runtime-widget-1.0.0.zip) and follow runtime deployment instructions from [here](https://github.com/SoftwareAG/cumulocity-runtime-widget-loader).
 
 ### Installation of widget through Appbuilder or Cockipt Deployment?
 
