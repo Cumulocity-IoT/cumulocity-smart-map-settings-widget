@@ -19,9 +19,6 @@ import { NgModule } from '@angular/core';
 import { Commonc8yService } from './common/c8y/commonc8y.service';
 import { CoreModule, HOOK_COMPONENTS } from '@c8y/ngx-components';
 
-import '~styles/index.css';
-
-
 import { FormsModule , ReactiveFormsModule} from '@angular/forms';
 import { GPFloorPlanSettingsComponent } from './component/building-detail/sms-building-detail.component';
 import { GPFloorPlanSettingsConfigComponent } from './component/config/gp-smart-map-settings.config.component';
