@@ -19,7 +19,6 @@
 import { Component, OnInit, isDevMode, ViewChild, Input } from '@angular/core';
 import { WidgetConfig, ConfigCoordinates, BuildingConfig } from '../../common/interfaces/widgetConfig.interface';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
-//import { MatTableDataSource, MatSort, MatDialog, MatDialogConfig } from '@angular/material';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
@@ -50,7 +49,7 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     isBusy  = false;
     dialogConfig = new MatDialogConfig();
      @ViewChild(MatSort, {static: true})
-    set sort(v: MatSort) { this.dataSource.sort = v; } 
+    set sort(v: MatSort) { this.dataSource.sort = v; }
     displayedColumns: string[] = ['id', 'name', 'assetType', 'location', 'floorsAvailable', 'delete', 'edit'];
     expandedElement: any;
     private _config: any = {};

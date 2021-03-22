@@ -25,8 +25,16 @@ import { BuildingEntryPopupComponent } from '../building-entry-popup/sms-buildin
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
 
-import L from 'leaflet2/dist/leaflet.js';
+declare global {
+    interface Window {
+        L: any;
+        h337: any;
+    }
+}
+import 'leaflet2/dist/leaflet.js';
+const L: any = window.L;
 import 'leaflet-draw';
+
 import { MarkerDetailPopupComponent } from '../marker-detail-popup/sms-marker-detail-popup.component';
 import { GeofenceDetailPopupComponent } from '../geofence-detail-popup/sms-geofence-detail-popup.component';
 import { FormControl } from '@angular/forms';
