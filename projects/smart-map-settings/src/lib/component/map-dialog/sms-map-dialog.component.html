@@ -4,7 +4,7 @@
   </div>
 
   <div class="sms-filter-panel" *ngIf="isLocationSearchActvie">
-    <span class=""><i class="fa fa-search"></i></span>
+    <!-- <span class=""><i class="fa fa-search"></i></span>
     <mat-form-field class="">
       <input type="text" placeholder="Search your location" matInput [formControl]="locationSearchTerm"
         [matAutocomplete]="auto" autocomplete="off">
@@ -19,12 +19,33 @@
           </mat-option>
         </ng-container>
       </mat-autocomplete>
-   </mat-form-field>
+   </mat-form-field> -->
+   <div id="searchLocation" class="input-group input-group-search">
+    <input
+      type="search"
+      class="form-control"
+      placeholder="Search your location"
+      [(ngModel)]="value"
+      [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
+      [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="display_name" (typeaheadOnSelect)="onSelect($event)"
+      [isAnimated]="true" autocomplete="off" [typeaheadOptionsLimit]="5"  [typeaheadMinLength]="3"
+    />
+      <span class="input-group-addon">
+        <i c8yIcon="search" *ngIf="!value || value.length === 0"></i>
+        <i
+        c8yIcon="times"
+        class="text-muted"
+        *ngIf="value && value.length > 0"
+        (click)="value = ''"
+      ></i>
+      </span>
+    </div>
+    <div *ngIf="isLoading" style="color:blue;margin: 5px;"><i class="fa fa-circle-o-notch fa-spin"></i></div>
   </div>
 </div>
 <div mat-dialog-content id="map" style="overflow: hidden;">
 </div>
 <div mat-dialog-actions style="float: right;">
-  <button mat-raised-button [mat-dialog-close]=""  >Cancel</button>
-  <button mat-raised-button color="primary" (click)="saveFloorPlan()" cdkFocusInitial>Save</button>
+  <button class="btn btn-default" [mat-dialog-close]=""  >Cancel</button>
+  <button class="btn btn-primary" (click)="saveFloorPlan()" cdkFocusInitial>Save</button>
 </div>

@@ -1,15 +1,12 @@
-<div *ngIf="isBusy">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+<div style="text-align: center;margin-top: 50px;" *ngIf="isBusy"><c8y-loading ></c8y-loading></div>
+
 <div class="action-button-right " *ngIf="dataSource.data.length > 0">
-      <button mat-button color="primary" (click)="openDialog()"title="Add geography"> <i class="fa fa-plus-circle"></i></button>
+      <button  style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" (click)="openDialog()"title="Add geography"> <i c8yIcon="plus-circle"></i></button>
 </div>
 <div>
 <div class="text-pad" *ngIf="dataSource.data.length === 0">
   <h3 class="gp-center">No Data to show.
-      To add, Click <button mat-button color="primary" (click)="openDialog()" title="Add geography">
-     <i class="fa fa-plus-circle"></i>
-    </button>
+      To add, Click <button  style="color:#1776BF;margin-right: 5px; font-size: 20px; " class="btn btn-clean" (click)="openDialog()"title="Add geography"> <i c8yIcon="plus-circle"></i></button>
   </h3>
   </div>
 <div *ngIf="dataSource.data.length > 0">
@@ -44,15 +41,17 @@
 
   <ng-container matColumnDef="delete">
     <th class="gp-sms-change-color" mat-header-cell *matHeaderCellDef > </th>
-    <td class="gp-sms-change-color" mat-cell *matCellDef="let row"><button mat-button color="warn" title="Delete"
-        (click)="$event.stopPropagation();deleteDialog(row)"> <i
-          class="fa fa-minus-circle"></i></button></td>
+    <td class="gp-sms-change-color" mat-cell *matCellDef="let row">
+      <button style="color:red;margin-right: 5px;" class="btn btn-clean" title="Delete"
+        (click)="$event.stopPropagation();deleteDialog(row)"><i c8yIcon="minus-circle"></i> </button></td>
   </ng-container>
 
   <ng-container matColumnDef="edit">
    <th class="gp-sms-change-color"mat-header-cell *matHeaderCellDef > </th>
-   <td class="gp-sms-change-color" mat-cell *matCellDef="let row"><button mat-button color="blue" title="Edit" (click)="$event.stopPropagation();editBuildingConfig(row)"> <i
-         class="fa fa-pencil-square-o"></i></button></td>
+   <td class="gp-sms-change-color" mat-cell *matCellDef="let row">
+     <button style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Edit" (click)="$event.stopPropagation();editBuildingConfig(row)"> 
+      <i c8yIcon="edit"></i>
+      </button></td>
  </ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->

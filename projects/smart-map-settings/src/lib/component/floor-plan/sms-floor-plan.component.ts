@@ -528,7 +528,7 @@ export class GPFloorDialogComponent implements OnInit {
                 }
             });
             Promise.all(promArr).then((success) => {
-                resolve();
+                resolve(true);
             });
         });
     }

@@ -1,23 +1,24 @@
-<div *ngIf="isBusy">
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+
+    <div style="text-align: center;height: 20px;" *ngIf="isBusy"><c8y-loading ></c8y-loading></div>
+
 <div class="">
     <div class="dia-header" *ngIf="dataSource.data.length > 0">
         <div class="action-button-right ">
         
-            <button (click)="initialise()" mat-icon-button [matMenuTriggerFor]="addMenu"  mat-button color="primary" title="Add floor">
-                <i class="fa fa-plus-circle"></i>
+            <button (click)="initialise()" [matMenuTriggerFor]="addMenu"  style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Add floor">
+                <i c8yIcon="plus-circle"></i>
             </button>
-            <button mat-icon-button mat-button color="primary" title="Save floor detail" 
+            <button style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Save floor detail" 
                (click)="saveFloorPlan()"  >
-                <i class="fa fa-check"></i>
+                <i c8yIcon="check"></i>
             </button>
         </div>
     </div>
     
     <ng-container *ngIf="dataSource.data.length === 0">
-        <p class="gp-center">To add the floor, Click <button (click)="initialise()" mat-icon-button [matMenuTriggerFor]="addMenu" mat-button color="primary" title="Add floor">
-            <mat-icon><i class="fa fa-plus-circle"></i></mat-icon>
+        <p class="gp-center">To add the floor, Click 
+            <button (click)="initialise()" [matMenuTriggerFor]="addMenu" style="color:#1776BF;margin-right: 5px; font-size: 20px; " class="btn btn-clean"  title="Add floor">
+            <i c8yIcon="plus-circle"></i>
         </button></p>
     </ng-container>
     <ng-container *ngIf="dataSource.data.length > 0">
@@ -44,10 +45,10 @@
             <ng-container matColumnDef="preview" stickyEnd>
                 <mat-header-cell *matHeaderCellDef> Geography </mat-header-cell>
                 <mat-cell *matCellDef="let row; let i = index"> 
-                    <button mat-icon-button (click)="previewFloor({index: i, row: row, coordinates: coordinates})"
-                        mat-button color="primary" title="setup/preview Markers and Geofences"
+                    <button (click)="previewFloor({index: i, row: row, coordinates: coordinates})"
+                    style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="setup/preview Markers and Geofences"
                         [disabled]="row.status === 'Marked for deletion' ">
-                        <i class="fa fa-globe"></i>
+                        <i c8yIcon="globe"></i>
                     </button>
                 </mat-cell>
                 </ng-container>
@@ -55,27 +56,27 @@
             <ng-container matColumnDef="edit" stickyEnd>
                 <mat-header-cell *matHeaderCellDef> Floor Plan </mat-header-cell>
                 <mat-cell *matCellDef="let row; let i = index"> 
-                    <button mat-icon-button [matMenuTriggerFor]="editMenu" [matMenuTriggerData]="{index: i}" (click)="initialise()"
-                        mat-button color="primary" title="Floor Plan" [disabled]="row.status === 'Marked for deletion' ">
-                        <i class="fa fa-upload"></i>
+                    <button [matMenuTriggerFor]="editMenu" [matMenuTriggerData]="{index: i}" (click)="initialise()"
+                    style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Floor Plan" [disabled]="row.status === 'Marked for deletion' ">
+                        <i c8yIcon="upload"></i>
                     </button>
                 </mat-cell>
                 </ng-container>
 
                 <ng-container matColumnDef="delete" >
                 <mat-header-cell *matHeaderCellDef> Delete </mat-header-cell>
-                <mat-cell *matCellDef="let row; let i = index"><button mat-button color="warn" title="Delete" 
-                    (click)="deleteFloorPlan(i, row.id)" [disabled]="row.status === 'Marked for deletion' "> 
-                        <i class="fa fa-minus-circle"></i>
+                <mat-cell *matCellDef="let row; let i = index"><button style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" 
+                    title="Delete" (click)="deleteFloorPlan(i, row.id)" [disabled]="row.status === 'Marked for deletion' "> 
+                        <i c8yIcon="minus-circle"></i>
                     </button>
                 </mat-cell>
                 </ng-container>
 
             <ng-container matColumnDef="revert">
                 <mat-header-cell *matHeaderCellDef> Revert </mat-header-cell>
-                <mat-cell *matCellDef="let row; let i = index"><button mat-button color="primary" title="Revert changes" (click)="undoFloorPlan(i, row.id, row.level)"
+                <mat-cell *matCellDef="let row; let i = index"><button style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Revert changes" (click)="undoFloorPlan(i, row.id, row.level)"
                     [disabled]="row.status === 'New' || row.status === undefined || row.status === 'Image alligned' || row.status === 'Markers touched' || row.status === 'Geofences touched'"> 
-                        <i class="fa fa-undo"></i>
+                        <i c8yIcon="undo"></i>
                     </button>
                 </mat-cell>
                 </ng-container>
@@ -98,8 +99,8 @@
                 </div>
                 
                 <div class="gp-input-group gp-center">
-                    <button type="submit" mat-flat-button color="primary" [disabled]="!floorEditConfigForm.valid"> 
-                        <i class="fa fa-check"></i>
+                    <button type="submit" style="color:#1776BF;margin-right: 5px;font-size: 20px;" class="btn btn-clean" [disabled]="!floorEditConfigForm.valid"> 
+                        <i c8yIcon="check"></i>
                     </button>
                 </div>
             </form>
@@ -125,8 +126,8 @@
                 </div> -->
                 
                 <div class="gp-input-group gp-center">
-                    <button type="submit" mat-flat-button color="primary" [disabled]="!floorAddConfigForm.valid"> 
-                        <i class="fa fa-check"></i>
+                    <button type="submit" style="color:#1776BF;margin-right: 5px; font-size: 20px;" class="btn btn-clean" [disabled]="!floorAddConfigForm.valid"> 
+                        <i c8yIcon="check"></i>
                     </button>
                 </div>
             </form>

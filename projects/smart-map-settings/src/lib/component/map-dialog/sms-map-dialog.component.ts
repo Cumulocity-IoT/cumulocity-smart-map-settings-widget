@@ -42,6 +42,8 @@ import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { LocationSearchService } from '../../common/locationSearch.service';
 import { ImageRotateService } from '../../common/imageRotate.service';
 import * as MarkerImage from '../../common/marker-icon';
+import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
+import { Observable, Observer } from 'rxjs';
 export interface GPSettingsDialogInterface {
     edit ?: boolean;
     preview ?: boolean;
@@ -88,6 +90,8 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
     locationSearchTerm = new FormControl();
     isLoading = false;
     geoSearchResults = [];
+    suggestions$: Observable<any[]>;
+    value= '';
     isLocationSearchActvie = false;
     geoJSONStyle = {
         color: '#8e9190',
@@ -116,7 +120,14 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
         this.geofencesMarkedForDelete = [];
 
         this.isLocationSearchActvie = this.locationSearchAPI.isSearchDisplay();
-        this.locationSearchTerm
+        this.suggestions$ = new Observable((observer: Observer<any>) => {
+            this.locationSearchAPI.searchGeoLocation(this.value).subscribe((res:any) => {
+                console.log(res);
+                observer.next(res);
+            });
+            
+        });
+        /* this.locationSearchTerm
         .valueChanges
             .pipe(
                 debounceTime(300),
@@ -129,9 +140,12 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
             )
             .subscribe((result: any) => {
                 this.geoSearchResults = result;
-            });
+            }); */
     }
 
+    changeTypeaheadLoading(e: boolean): void {
+        this.isLoading = e;
+    }
     /**
      * Change map coordinates based on location search API output
      */
@@ -142,6 +156,10 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
             this.map.flyToBounds(myBounds1, { animate: true, maxZoom: 14});
             return searchResult.display_name;
         }
+    }
+
+    onSelect(event: TypeaheadMatch): void {
+        this.displayFn(event.item);
     }
 
     /**
@@ -427,7 +445,7 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
         _this.map.flyToBounds(myBounds, {animate: true});
 
         const editLayer = L.polygon(bounds, { color: 'blue', weight: 1, type: 'polygon'});
-        const popup = L.popup({maxWidth: 500});
+        const popup = L.popup({minWidth: 350, maxWidth: 500});
         editLayer.bindPopup(popup);
         editableLayers.addLayer(editLayer);
         _this.zone.run(() => _this.createPlanningPopup(editableLayers, popup, editLayer));

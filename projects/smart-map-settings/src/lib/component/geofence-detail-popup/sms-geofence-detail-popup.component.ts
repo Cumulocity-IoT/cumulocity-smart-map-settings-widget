@@ -21,6 +21,7 @@ import { WidgetConfig, GeofenceConfig, SmartRuleConfig } from '../../common/inte
 import { FormBuilder, FormControl } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap, switchMap, finalize, skip } from 'rxjs/operators';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
+import { from, Observable, Observer } from 'rxjs';
 
 @Component({
     // tslint:disable-next-line: component-selector
@@ -56,9 +57,12 @@ export class GeofenceDetailPopupComponent implements OnInit, DoCheck {
     searching = false;
     searchFailed = false;
     model: any;
+    value: any;
     isFormValid = this.isDataValid();
     deviceSearchTerm = new FormControl();
     deviceSearchResults = [];
+
+    suggestions$: Observable<any[]>;
 
     geofenceConfigForm;
     constructor(
@@ -72,9 +76,28 @@ export class GeofenceDetailPopupComponent implements OnInit, DoCheck {
 
     ngOnInit(): void {
         this.initializeFloorCoordinates();
-        this.deviceSearch();
+        // this.deviceSearch();
+        this.suggestions$ = new Observable((observer: Observer<any>) => {
+            this.cmonSvc.getAllDevices(1, this.model).then ( res => {
+                observer.next(res.data);
+            });
+        });
     }
 
+    /* search = (text$: Observable<string>) =>
+    text$.pipe(
+      debounceTime(300),
+      distinctUntilChanged(),
+      tap(() => this.searching = true),
+      switchMap(term =>
+        from(this.cmonSvc.getAllDevices(1, term))
+      ),
+      tap(() => this.searching = false)
+    ) */
+
+    changeTypeaheadLoading(e: boolean): void {
+        this.searching = e;
+    }
     /**
      * Intialzing geofence coodrinates for new geofence or loading coordinates for exiting geofence
      */
@@ -89,7 +112,8 @@ export class GeofenceDetailPopupComponent implements OnInit, DoCheck {
                 this.cmonSvc.getTargetObject(this.smartRuleConfig.smartRuleDevcie)
                     .then((data) => {
                        // this.searchResult = data;
-                        this.deviceSearchTerm.setValue(data);
+                     //   this.deviceSearchTerm.setValue(data);
+                        this.model = data.name;
                         this.smartRuleConfig.smartRuleDevcie = data.id;
                     });
             }
@@ -146,7 +170,7 @@ export class GeofenceDetailPopupComponent implements OnInit, DoCheck {
                 distinctUntilChanged(),
                 skip(1),
                 tap(() => this.searching = true),
-                switchMap(value => this.cmonSvc.getAllDevices(1, value)
+                switchMap(value => from(this.cmonSvc.getAllDevices(1, value))
                     .pipe(
                         tap(() => this.searching = false),
                     )

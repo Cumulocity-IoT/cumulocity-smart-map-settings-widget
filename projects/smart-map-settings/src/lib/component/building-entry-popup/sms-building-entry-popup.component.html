@@ -6,36 +6,58 @@
             <label class="mb-2 ltc-title-label">Building Details</label>
             <!-- <button class="gp-sms-moveright" mat-button color="primary" [disabled]="!isSaved" (click)="onEdit()"> 
               <i class="fa fa-pencil-square-o"></i></button> -->
-            <button class=""mat-button color="primary" [disabled]="!buildingConfigForm.valid" (click)="onSave()">
-              <i class="fa fa-check"></i></button>
+            <button style="color:#1776BF;margin-right: 5px;font-size: 20px;" class="btn btn-clean" [disabled]="!buildingConfigForm.valid" (click)="onSave()">
+              <i c8yIcon="check"></i></button>
         </div>
       <div >
-          <form [formGroup]="buildingConfigForm">
-            <mat-form-field >
+          <form [formGroup]="buildingConfigForm" class="form-group-sm">
+            <!-- <mat-form-field >
               <mat-label>Building Name </mat-label>
                 <input type="text" matInput  
                 id="buildingName" formControlName="buildingName" placeholder="2A east" >
-            </mat-form-field>
+            </mat-form-field> -->
+            <div class="row col-sm-12 p-4">
+              <label for="buildingName" class="col-sm-4 control-label">Building Name: </label>
+              <div class="col-sm-8">
+                <input type="text" formControlName="buildingName" id="buildingName" class="form-control"
+                  placeholder="2A east">
+              </div>
+            </div>
+            
 
-            <mat-form-field>
+            <!-- <mat-form-field>
               <mat-label>Location </mat-label>
                 <input  type="text"matInput  id="location" 
                 formControlName="location" placeholder="Bengaluru" pattern="^[a-zA-Z ]*$">
                 <!-- <p *ngIf="!buildingConfigForm.controls.location.errors.required"> Alphabets are allowed only </p> -->
-            </mat-form-field>
+          <!--  </mat-form-field> -->
+          <div class="row col-sm-12 p-4">
+             <label for="location" class="col-sm-4 control-label">Location:</label>
+              <div class="col-sm-8">
+                <input type="text" formControlName="location" id="location" class="form-control"
+                placeholder="Bengaluru" pattern="^[a-zA-Z ]*$">
+              </div>
+            </div>
 
-            <mat-form-field>
-              <mat-label>Asset type </mat-label>
+            <!-- <mat-form-field>
+              <mat-label>Asset type </mat-label> -->
               <!-- <mat-select [(ngModel)]="buildingConfig.assetType" name="assetTypes" id="assetTypes"
                   (selectionChange)="onSave()" [disabled]="isSaved" required>
                 <mat-option *ngFor="let assetType of assetTypes" [value]="assetType">
                   {{assetType}}
                 </mat-option>
               </mat-select> -->
-                <input type="text" matInput  id="assetTypes" 
+                <!-- <input type="text" matInput  id="assetTypes" 
                 formControlName="assetTypes" placeholder="Asset type" pattern="^[a-zA-Z ]*$">
                 <!-- <p *ngIf="!buildingConfigForm.controls.assetType.valid"> Alphabets are allowed only </p> -->
-            </mat-form-field>
+            <!-- </mat-form-field> -->
+            <div class="row col-sm-12 p-4">
+            <label for="assetTypes" class="col-sm-4 control-label">Asset type:</label>
+              <div class="col-sm-8">
+                <input type="text" formControlName="assetTypes" id="assetTypes" class="form-control"
+                placeholder="Asset type" pattern="^[a-zA-Z ]*$">
+              </div>
+            </div>
         </form>
       </div>
     </div>
