@@ -4,22 +4,6 @@
   </div>
 
   <div class="sms-filter-panel" *ngIf="isLocationSearchActvie">
-    <!-- <span class=""><i class="fa fa-search"></i></span>
-    <mat-form-field class="">
-      <input type="text" placeholder="Search your location" matInput [formControl]="locationSearchTerm"
-        [matAutocomplete]="auto" autocomplete="off">
-
-      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
-        <mat-option *ngIf="isLoading" class="autoOptions">
-          Searching...
-        </mat-option>
-        <ng-container *ngIf="!isLoading">
-          <mat-option *ngFor="let searchResult of geoSearchResults" class="autoOptions" [value]="searchResult">
-            {{searchResult.display_name}}
-          </mat-option>
-        </ng-container>
-      </mat-autocomplete>
-   </mat-form-field> -->
    <div id="searchLocation" class="input-group input-group-search">
     <input
       type="search"

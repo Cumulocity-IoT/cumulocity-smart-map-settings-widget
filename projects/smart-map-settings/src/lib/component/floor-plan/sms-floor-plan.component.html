@@ -5,7 +5,7 @@
     <div class="dia-header" *ngIf="dataSource.data.length > 0">
         <div class="action-button-right ">
         
-            <button (click)="initialise()" [matMenuTriggerFor]="addMenu"  style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Add floor">
+            <button (click)="initialise()" type="button" [popover]="addMenu" container="body" [outsideClick]="true"  style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Add floor">
                 <i c8yIcon="plus-circle"></i>
             </button>
             <button style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Save floor detail" 
@@ -17,7 +17,7 @@
     
     <ng-container *ngIf="dataSource.data.length === 0">
         <p class="gp-center">To add the floor, Click 
-            <button (click)="initialise()" [matMenuTriggerFor]="addMenu" style="color:#1776BF;margin-right: 5px; font-size: 20px; " class="btn btn-clean"  title="Add floor">
+            <button (click)="initialise()" [popover]="addMenu" [outsideClick]="true" container="body" style="color:#1776BF;margin-right: 5px; font-size: 20px; " class="btn btn-clean"  title="Add floor">
             <i c8yIcon="plus-circle"></i>
         </button></p>
     </ng-container>
@@ -56,7 +56,7 @@
             <ng-container matColumnDef="edit" stickyEnd>
                 <mat-header-cell *matHeaderCellDef> Floor Plan </mat-header-cell>
                 <mat-cell *matCellDef="let row; let i = index"> 
-                    <button [matMenuTriggerFor]="editMenu" [matMenuTriggerData]="{index: i}" (click)="initialise()"
+                    <button [popover]="editMenu" [outsideClick]="true" container="body" [popoverContext]="{index: i}" (click)="initialise()"
                     style="color:#1776BF;margin-right: 5px;" class="btn btn-clean" title="Floor Plan" [disabled]="row.status === 'Marked for deletion' ">
                         <i c8yIcon="upload"></i>
                     </button>
@@ -87,8 +87,8 @@
         </table>
     </ng-container>
 
-    <mat-menu #editMenu="matMenu">
-        <ng-template matMenuContent let-index="index">
+   
+        <ng-template #editMenu let-index="index" >
             <form (ngSubmit)="editFloorPlan(index, editFile.files)" [formGroup]="floorEditConfigForm">
                 <div class="gp-input-group">
                     <label for="floorMapImage" >Floor Image:</label>
@@ -105,10 +105,9 @@
                 </div>
             </form>
         </ng-template>
-    </mat-menu>
+ 
 
-    <mat-menu #addMenu="matMenu">
-        <ng-template matMenuContent >
+        <ng-template #addMenu >
             <form  (ngSubmit)="addFloorPlan(addlevel.value, null)" [formGroup]="floorAddConfigForm">
                 <div class="gp-input-group">
                     <label for="level" >Floor Level:</label>
@@ -132,5 +131,4 @@
                 </div>
             </form>
         </ng-template>
-    </mat-menu>
 </div>

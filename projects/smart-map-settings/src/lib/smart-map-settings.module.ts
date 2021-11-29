@@ -26,7 +26,6 @@ import { GPFloorPlanSettingsConfigComponent } from './component/config/gp-smart-
 
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatMenuModule } from '@angular/material/menu';
 
 import { GPSmsMapDialogComponent } from './component/map-dialog/sms-map-dialog.component';
 import { BuildingEntryPopupComponent } from './component/building-entry-popup/sms-building-entry-popup.component';
@@ -38,20 +37,20 @@ import { LocationSearchService } from './common/locationSearch.service';
 import { ImageRotateService } from './common/imageRotate.service';
 import { GPDeleteConfirmComponent } from './component/delete-confirm-popup/sms-delete-confirm.component';
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
-import { MatRippleModule } from '@angular/material/core';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [ BuildingEntryPopupComponent, MarkerDetailPopupComponent, GeofenceDetailPopupComponent,
     GPFloorPlanSettingsComponent, GPFloorPlanSettingsConfigComponent, GPSmsMapDialogComponent, GPFloorDialogComponent,
     GPDeleteConfirmComponent],
   imports: [
-
+    CommonModule,
     CoreModule,
     TypeaheadModule.forRoot(),
+    PopoverModule.forRoot(),
     MatTableModule,
     MatDialogModule,
-    MatMenuModule,
-    MatRippleModule,
     FormsModule,
     ReactiveFormsModule,
   ],

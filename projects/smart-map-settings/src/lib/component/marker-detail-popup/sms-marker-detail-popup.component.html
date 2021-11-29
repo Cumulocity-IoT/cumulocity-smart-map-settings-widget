@@ -1,27 +1,6 @@
 <div>
   <div >
   <form [formGroup]="deviceForm" >
-   <!--  <mat-form-field>
-      <mat-label>Device </mat-label> -->
-      <!-- <input id="device" type="text" matInput formControlName="device" (selectItem)="deviceSelected($event.item)"
-         [class.is-invalid]="searchFailed" [(ngModel)]="model" [resultFormatter]="resultFormatDeviceListValue"
-         [inputFormatter]="inputFormatDeviceListValue" [ngbTypeahead]="search" placeholder="Search device" 
-         autocomplete="on" />
-        <small *ngIf="searching" class="form-text text-muted">searching...</small>
-        <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div> -->
-        <!-- <input type="text" placeholder="Search device" matInput formControlName="device"
-          [matAutocomplete]="auto" autocomplete="off">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="deviceSelected.bind(this)">
-          <mat-option *ngIf="searching" class="autoOptions">
-            Searching...
-          </mat-option>
-          <ng-container *ngIf="!searching">
-            <mat-option *ngFor="let searchResult of deviceSearchResults" class="autoOptions" [value]="searchResult">
-              {{searchResult.name}}
-            </mat-option>
-          </ng-container>
-        </mat-autocomplete>
-    </mat-form-field> -->
     <div id="searchDevice" class="input-group input-group-search" style="width: 60%;display: inline-flex;">
       <input id="searchDeviceText"
         type="search"

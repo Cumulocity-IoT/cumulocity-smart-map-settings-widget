@@ -11,11 +11,6 @@
         </div>
       <div >
           <form [formGroup]="buildingConfigForm" class="form-group-sm">
-            <!-- <mat-form-field >
-              <mat-label>Building Name </mat-label>
-                <input type="text" matInput  
-                id="buildingName" formControlName="buildingName" placeholder="2A east" >
-            </mat-form-field> -->
             <div class="row col-sm-12 p-4">
               <label for="buildingName" class="col-sm-4 control-label">Building Name: </label>
               <div class="col-sm-8">
@@ -23,14 +18,6 @@
                   placeholder="2A east">
               </div>
             </div>
-            
-
-            <!-- <mat-form-field>
-              <mat-label>Location </mat-label>
-                <input  type="text"matInput  id="location" 
-                formControlName="location" placeholder="Bengaluru" pattern="^[a-zA-Z ]*$">
-                <!-- <p *ngIf="!buildingConfigForm.controls.location.errors.required"> Alphabets are allowed only </p> -->
-          <!--  </mat-form-field> -->
           <div class="row col-sm-12 p-4">
              <label for="location" class="col-sm-4 control-label">Location:</label>
               <div class="col-sm-8">
@@ -39,18 +26,6 @@
               </div>
             </div>
 
-            <!-- <mat-form-field>
-              <mat-label>Asset type </mat-label> -->
-              <!-- <mat-select [(ngModel)]="buildingConfig.assetType" name="assetTypes" id="assetTypes"
-                  (selectionChange)="onSave()" [disabled]="isSaved" required>
-                <mat-option *ngFor="let assetType of assetTypes" [value]="assetType">
-                  {{assetType}}
-                </mat-option>
-              </mat-select> -->
-                <!-- <input type="text" matInput  id="assetTypes" 
-                formControlName="assetTypes" placeholder="Asset type" pattern="^[a-zA-Z ]*$">
-                <!-- <p *ngIf="!buildingConfigForm.controls.assetType.valid"> Alphabets are allowed only </p> -->
-            <!-- </mat-form-field> -->
             <div class="row col-sm-12 p-4">
             <label for="assetTypes" class="col-sm-4 control-label">Asset type:</label>
               <div class="col-sm-8">

@@ -11,11 +11,6 @@
           <form class="form-group-sm">
             <div class="row col-sm-12">
               <div class="col-sm-6 geofence-field-item">
-                <!-- <mat-form-field>
-                  <mat-label>Geofence Name </mat-label>
-                  <input type="text" matInput [(ngModel)]="geofenceConfig.name" name="geofenceName" id="geofenceName"
-                    placeholder="Production Area" >
-                </mat-form-field> -->
                 <label for="geofenceName" class="control-label">Geofence Name</label>
                 <div class="">
                   <input type="text"  [(ngModel)]="geofenceConfig.name" id="geofenceName"  name="geofenceName" class="form-control"
@@ -23,14 +18,6 @@
                 </div>
               </div>
               <div *ngIf="level === '0' " class="col-sm-6 geofence-field-item">
-                  <!-- <mat-form-field>
-                    <mat-label>Add Smart Rule </mat-label>
-                    <mat-select [(ngModel)]="smartRuleConfig.smartRule" name="smartRule" id="smartRule">
-                      <mat-option *ngFor="let smartRuleOption of smartRuleOptions" selected='!smartRuleConfig.smartRule || smartRuleConfig.smartRule ===
-                      smartRuleOption' [value]="smartRuleOption">
-                        {{smartRuleOption}}</mat-option>
-                    </mat-select>
-                  </mat-form-field> -->
                     <label for="smartRule" class="control-label">Add Smart Rule</label>
                     <div class="">
                         <select  [(ngModel)]="smartRuleConfig.smartRule" 
@@ -52,12 +39,6 @@
                   </div>
                   <div class="row col-sm-12">
                       <div class="col-sm-6 geofence-field-item">
-                       <!--  <mat-form-field>
-                          <mat-label>Rule Name </mat-label>
-                          <input type="text" matInput [(ngModel)]="smartRuleConfig.smartRuleName"
-                            name="smartRuleName"
-                            id="smartRuleName" placeholder="On geofence create alarm">
-                        </mat-form-field> -->
                         <label for="smartRuleName" class="control-label">Rule Name</label>
                         <div class="">
                           <input type="text"  [(ngModel)]="smartRuleConfig.smartRuleName" id="smartRuleName" 
@@ -66,18 +47,6 @@
                         </div>
                       </div>
                       <div class="col-sm-6 geofence-field-item">
-                        <!-- <mat-form-field>
-                          <mat-label>Trigger On </mat-label>
-                          <mat-select [(ngModel)]="smartRuleConfig.smartRuleTrigger"
-                            name="smartRuleTrigger"
-                            id="smartRuleTrigger">
-                            <mat-option *ngFor="let smartRuleTriggerOption of smartRuleTriggerOptions"
-                              selected='!smartRuleConfig.smartRuleTrigger ||
-                              smartRuleConfig.smartRuleTrigger ===
-                      smartRuleTriggerOption.value' [value]="smartRuleTriggerOption.value">
-                              {{smartRuleTriggerOption.viewValue}}</mat-option>
-                          </mat-select>
-                        </mat-form-field> -->
                         <label for="smartRuleTrigger" class="control-label">Trigger On</label>
                         <div class="">
                             <select  [(ngModel)]="smartRuleConfig.smartRuleTrigger" 
@@ -93,12 +62,6 @@
                   </div>
                     <div class="row col-sm-12">
                       <div class="col-sm-6 geofence-field-item">
-                        <!-- <mat-form-field>
-                          <mat-label>Alarm Type </mat-label>
-                          <input type="text" matInput [(ngModel)]="smartRuleConfig.smartRuleType"
-                            name="smartRuleType"
-                            id="smartRuleType" placeholder="c8y_GeofenceAlarm">
-                        </mat-form-field> -->
                         <label for="smartRuleType" class="control-label">Alarm Type</label>
                         <div class="">
                           <input type="text"  [(ngModel)]="smartRuleConfig.smartRuleType" id="smartRuleType" 
@@ -107,18 +70,6 @@
                         </div>
                       </div>
                       <div class="col-sm-6 geofence-field-item">
-                         <!-- <mat-form-field>
-                           <mat-label>Alarm Severity </mat-label>
-                           <mat-select [(ngModel)]="smartRuleConfig.smartRuleSeverity"
-                             name="smartRuleSeverity"
-                             id="smartRuleSeverity">
-                             <mat-option *ngFor="let smartRuleSeverityOption of smartRuleSeverityOptions"
-                               selected='!smartRuleConfig.smartRuleSeverity ||
-                               smartRuleConfig.smartRuleSeverity ===
-                     smartRuleSeverityOption' [value]="smartRuleSeverityOption">
-                               {{smartRuleSeverityOption}}</mat-option>
-                           </mat-select>
-                         </mat-form-field> -->
                          <label for="smartRuleSeverity" class=" control-label">Alarm Severity</label>
                           <div class="">
                             <select  [(ngModel)]="smartRuleConfig.smartRuleSeverity" 
@@ -134,12 +85,6 @@
                     </div>
                     <div class="row col-sm-12">
                       <div class="col-sm-6 geofence-field-item">
-                        <!-- <mat-form-field>
-                          <mat-label>Alarm Text </mat-label>
-                          <input type="text" matInput [(ngModel)]="smartRuleConfig.smartRuleText"
-                            name="smartRuleText"
-                            id="smartRuleText" placeholder="Geofence violation">
-                        </mat-form-field> -->
                         <label for="smartRuleText" class="control-label">Alarm Text</label>
                         <div class="">
                           <input type="text"  [(ngModel)]="smartRuleConfig.smartRuleText" id="smartRuleText" 
@@ -148,30 +93,6 @@
                         </div>
                       </div>
                       <div class="col-sm-6 geofence-field-item">
-                         <!-- <mat-form-field>
-                           <mat-label>Device </mat-label> -->
-                           <!-- <input id="smartRuleDevice" type="text" matInput name="smartRuleDevice"
-                             (selectItem)="deviceSelected($event.item)" [class.is-invalid]="searchFailed"
-                             [(ngModel)]="model" [resultFormatter]="resultFormatDeviceListValue"
-                             [inputFormatter]="inputFormatDeviceListValue" [ngbTypeahead]="search"
-                             placeholder="Search device" autocomplete="off" />
-                           <small *ngIf="searching" class="form-text text-muted">searching...</small>
-                           <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.
-                           </div> -->
-                            <!-- <input type="text" placeholder="Search device" matInput
-                              [formControl]="deviceSearchTerm" [matAutocomplete]="auto" autocomplete="off">
-                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="deviceSelected.bind(this)">
-                              <mat-option *ngIf="searching" class="autoOptions">
-                                Searching...
-                              </mat-option>
-                              <ng-container *ngIf="!searching">
-                                <mat-option *ngFor="let searchResult of deviceSearchResults" class="autoOptions"
-                                  [value]="searchResult">
-                                  {{searchResult.name}}
-                                </mat-option>
-                              </ng-container>
-                            </mat-autocomplete>
-                         </mat-form-field> -->
                          <div id="smartRuleDeviceSearch" class="input-group input-group-search" style="padding-top:20px; display: inline-flex;">
                           <input id="smartRuleDevice" name="smartRuleDevice"
                             type="search"
