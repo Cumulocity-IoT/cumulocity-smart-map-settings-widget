@@ -137,7 +137,8 @@ export class Commonc8yService {
     }
 
     // Get All devices based on query search parameter
-    getAllDevices(pageToGet: number,  searchName ?: any): Observable<IManagedObject[]> {
+
+    getAllDevices(pageToGet: number, searchName?: any): Promise<IResultList<IManagedObject>> {
         const inventoryFilter = {
             pageSize: 10,
             withTotalPages: true,
@@ -148,9 +149,18 @@ export class Commonc8yService {
         } else {
             inventoryFilter['query'] = `$filter=(has(c8y_IsDevice))`;
         }
+        return new Promise(
+            (resolve, reject) => {
+                this.invSvc.list(inventoryFilter)
+                    .then((resp) => {
+                        if (resp.res.status === 200) {
+                            resolve(resp);
+                        } else {
+                            reject(resp);
+                        }
+                    });
+            });
 
-        // tslint:disable-next-line: deprecation
-        return this.invSvc.list$(inventoryFilter);
 
     }
 

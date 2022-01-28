@@ -29,12 +29,14 @@
 }
 .sms-filter-panel {
   font-style: italic;
-}
-.sms-filter-panel .mat-form-field {
+  display: inline-flex;
   width: 300px;
   margin-left: 5px;
 }
 .autoOptions{
   font-size: 12px;
   height: 25px;
+}
+::ng-deep .dropdown-menu {
+  width: 300px !important;
 }

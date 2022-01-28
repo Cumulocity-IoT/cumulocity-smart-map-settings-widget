@@ -25,17 +25,7 @@ import { GPFloorPlanSettingsConfigComponent } from './component/config/gp-smart-
 
 
 import { MatTableModule } from '@angular/material/table';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatSortModule } from '@angular/material/sort';
-import { MatSelectModule } from '@angular/material/select'; 
-import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
-import { MatButtonModule } from '@angular/material/button';
 
 import { GPSmsMapDialogComponent } from './component/map-dialog/sms-map-dialog.component';
 import { BuildingEntryPopupComponent } from './component/building-entry-popup/sms-building-entry-popup.component';
@@ -46,39 +36,23 @@ import { GeofenceDetailPopupComponent } from './component/geofence-detail-popup/
 import { LocationSearchService } from './common/locationSearch.service';
 import { ImageRotateService } from './common/imageRotate.service';
 import { GPDeleteConfirmComponent } from './component/delete-confirm-popup/sms-delete-confirm.component';
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
+import { PopoverModule } from 'ngx-bootstrap/popover';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [ BuildingEntryPopupComponent, MarkerDetailPopupComponent, GeofenceDetailPopupComponent,
     GPFloorPlanSettingsComponent, GPFloorPlanSettingsConfigComponent, GPSmsMapDialogComponent, GPFloorDialogComponent,
     GPDeleteConfirmComponent],
   imports: [
-
+    CommonModule,
     CoreModule,
-  //  BrowserAnimationsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
+    TypeaheadModule.forRoot(),
+    PopoverModule.forRoot(),
     MatTableModule,
-    MatProgressBarModule,
     MatDialogModule,
-    MatMenuModule,
-    MatIconModule,
-    MatSortModule,
     FormsModule,
     ReactiveFormsModule,
-    MatAutocompleteModule,
-    MatButtonModule,
-    MatButtonToggleModule,
-    /* 
-    MatPaginatorModule,  
-  
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSlideToggleModule, */
-    /* AngularResizedEventModule,
-     */
   ],
   exports: [
     GPFloorPlanSettingsComponent, GPFloorPlanSettingsConfigComponent, GPSmsMapDialogComponent, GPDeleteConfirmComponent],

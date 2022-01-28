@@ -19,7 +19,7 @@
 import { Component, OnInit, Injectable, Output, EventEmitter, Input } from '@angular/core';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import {Observable, of} from 'rxjs';
+import {from, Observable, Observer, of} from 'rxjs';
 import {debounceTime, distinctUntilChanged, map, filter, tap, switchMap, catchError, skip} from 'rxjs/operators';
 
 @Component({
@@ -46,6 +46,8 @@ export class MarkerDetailPopupComponent implements OnInit {
   searching = false;
   searchFailed = false;
   deviceSearchResults = [];
+  suggestions$: Observable<any[]>;
+  value= '';
 
   constructor(
     private cmonSvc: Commonc8yService,
@@ -58,19 +60,28 @@ export class MarkerDetailPopupComponent implements OnInit {
    /**
     * Search device name based on given text in typeahead
     */
-  search = (text$: Observable<string>) =>
+  /* search = (text$: Observable<string>) =>
     text$.pipe(
       debounceTime(300),
       distinctUntilChanged(),
       tap(() => this.searching = true),
       switchMap(term =>
-        this.cmonSvc.getAllDevices(1, term)
+        from(this.cmonSvc.getAllDevices(1, term))
       ),
       tap(() => this.searching = false)
-    )
+    ) */
 
+  
+ changeTypeaheadLoading(e: boolean): void {
+      this.searching = e;
+  }
   ngOnInit() {
-    this.deviceSearch();
+  //  this.deviceSearch();
+    this.suggestions$ = new Observable((observer: Observer<any>) => {
+      this.cmonSvc.getAllDevices(1, this.model).then ( res => {
+          observer.next(res.data);
+      });
+  });
   }
 
   resultFormatDeviceListValue(value: any) {
@@ -95,7 +106,7 @@ export class MarkerDetailPopupComponent implements OnInit {
         distinctUntilChanged(),
         tap(() => this.searching = true),
         switchMap(value =>
-          this.cmonSvc.getAllDevices(1, value.device)
+          from(this.cmonSvc.getAllDevices(1, value.device))
         .pipe(
             tap(() => this.searching = false),
           )

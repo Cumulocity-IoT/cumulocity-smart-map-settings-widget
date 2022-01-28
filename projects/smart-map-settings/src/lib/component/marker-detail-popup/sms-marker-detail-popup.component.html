@@ -1,27 +1,29 @@
 <div>
   <div >
   <form [formGroup]="deviceForm" >
-    <mat-form-field>
-      <mat-label>Device </mat-label>
-      <!-- <input id="device" type="text" matInput formControlName="device" (selectItem)="deviceSelected($event.item)"
-         [class.is-invalid]="searchFailed" [(ngModel)]="model" [resultFormatter]="resultFormatDeviceListValue"
-         [inputFormatter]="inputFormatDeviceListValue" [ngbTypeahead]="search" placeholder="Search device" 
-         autocomplete="on" />
-        <small *ngIf="searching" class="form-text text-muted">searching...</small>
-        <div class="invalid-feedback" *ngIf="searchFailed">Sorry, suggestions could not be loaded.</div> -->
-        <input type="text" placeholder="Search device" matInput formControlName="device"
-          [matAutocomplete]="auto" autocomplete="off">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="deviceSelected.bind(this)">
-          <mat-option *ngIf="searching" class="autoOptions">
-            Searching...
-          </mat-option>
-          <ng-container *ngIf="!searching">
-            <mat-option *ngFor="let searchResult of deviceSearchResults" class="autoOptions" [value]="searchResult">
-              {{searchResult.name}}
-            </mat-option>
-          </ng-container>
-        </mat-autocomplete>
-    </mat-form-field>
+    <div id="searchDevice" class="input-group input-group-search" style="width: 60%;display: inline-flex;">
+      <input id="searchDeviceText"
+        type="search"
+        class="form-control"
+        placeholder="Search Device"
+        formControlName="device"
+        [(ngModel)]="model"
+        [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
+        [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="name" (typeaheadOnSelect)="deviceSelected($event.item)"
+        [isAnimated]="true" autocomplete="off" [typeaheadOptionsLimit]="5"  [typeaheadMinLength]="3"
+      />
+        <span class="input-group-addon" style="margin-right: 20px;;">
+          <i c8yIcon="search" *ngIf="!value || value.length === 0"></i>
+          <i
+          c8yIcon="times"
+          class="text-muted"
+          *ngIf="model && model.length > 0"
+          (click)="model = ''"
+        ></i>
+        </span>
+      
+      <div *ngIf="searching" style="color:blue;margin: 5px;"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+    </div>
     </form>
   </div>
   <!-- <div *ngIf="editData">

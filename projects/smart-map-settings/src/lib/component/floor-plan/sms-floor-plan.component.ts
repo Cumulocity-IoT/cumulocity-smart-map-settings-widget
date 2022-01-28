@@ -246,8 +246,11 @@ export class GPFloorDialogComponent implements OnInit {
                         this.dataSource.data[data.index].status = 'Markers touched';
                     } else {
                         this.dataSource.data[data.index].status = this.dataSource.data[data.index].status.concat(', Markers touched');
-                        this.addedFloors[ind].markers = this.addedFloors[ind].markers.concat(result.markers.added);
-                        this.addedFloors[ind].markers = this.addedFloors[ind].markers.concat(result.markers.unchanged);
+                        if(ind !== -1){
+                            this.addedFloors[ind].markers = this.addedFloors[ind].markers.concat(result.markers.added);
+                            this.addedFloors[ind].markers = this.addedFloors[ind].markers.concat(result.markers.unchanged);
+                        }
+                        
                     }
                 }
             }
@@ -528,7 +531,7 @@ export class GPFloorDialogComponent implements OnInit {
                 }
             });
             Promise.all(promArr).then((success) => {
-                resolve();
+                resolve(true);
             });
         });
     }

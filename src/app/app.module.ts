@@ -21,7 +21,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, Injectable } from '@angular/core';
 import { AppComponent } from './app.component';
 import { GpSmartMapSettingsModule } from 'projects/smart-map-settings/src/public_api';
-import { AppStateService, OptionsService } from '@c8y/ngx-components';
+import { AppStateService, CoreModule, OptionsService } from '@c8y/ngx-components';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {
   Client,
   InventoryService,
@@ -73,7 +74,9 @@ export class MockAppStateService {
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     GpSmartMapSettingsModule,
+    CoreModule.forRoot(),
     RouterModule
   ],
     providers: [
