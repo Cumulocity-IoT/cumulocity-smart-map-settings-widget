@@ -7,7 +7,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 
 |APPLICATION BUILDER | CUMULOCITY | SMART MAP SETTINGS WIDGET |
 |--------------------|------------|---------------------------|
-| 1.3.x              | 1011.x.x   | 2.x.x                     |
+| 1.3.x              | >= 1011.x.x| 2.x.x                     |
 | 1.2.x              | 1010.x.x   | 1.x.x                     |  
 
 ![](https://user-images.githubusercontent.com/32765455/94546270-465a2080-026b-11eb-87f0-f99b739931c0.png)
