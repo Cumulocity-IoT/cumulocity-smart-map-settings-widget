@@ -3,7 +3,7 @@
 This widget 'Smart map settings' is created using Anuglar Library and can be deployed in App Builder and Cockpit as a cumulocity widget. It allows you to mark and create a Geography on specified location. After the Geography is created, it allows to create floors, Geofences and device positioning. This widget is used as configuration for Smart Map widget
 
   
-### Please choose Smart Map Settings release based on Cumuloicty/Application builder version:
+### Please choose Smart Map Settings release based on Cumulocity/Application builder version:
 
 |APPLICATION BUILDER | CUMULOCITY | SMART MAP SETTINGS WIDGET |
 |--------------------|------------|---------------------------|
@@ -36,7 +36,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 
 * This widget support runtime deployment. Download [Runtime Binary](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/2.0.0/smartmap-settings-runtime-widget-2.0.0.zip) and use application builder to install your runtime widget.
 
-### Installation of widget through Appbuilder or Cockipt Deployment?
+### Installation of widget through Appbuilder?
 
 **Supported Cumulocity Environments:** 
 
