@@ -406,7 +406,8 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
             Promise.all(promArr).then(res => {
                 res.forEach(data => {
                     const editLayer = L.circleMarker(data.c8y_Position, {color: 'purple', weight: 1, type: 'circle'});
-                    editLayer.bindPopup(`<div><b>Device</b> : <span>${data.name}</span></div>`);
+                    if(data?.c8y_IsAsset) {  editLayer.bindPopup(`<div><b>Asset</b> : <span>${data.name}</span></div>`);}
+                    else  { editLayer.bindPopup(`<div><b>Device</b> : <span>${data.name}</span></div>`);}
                     editableLayers.addLayer(editLayer);
                     _this.openMarkerPopup(editableLayers, data);
                 });

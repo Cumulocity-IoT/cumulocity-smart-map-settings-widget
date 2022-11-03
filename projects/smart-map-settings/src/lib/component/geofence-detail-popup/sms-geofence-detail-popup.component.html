@@ -97,7 +97,7 @@
                           <input id="smartRuleDevice" name="smartRuleDevice"
                             type="search"
                             class="form-control"
-                            placeholder="Search Device"
+                            placeholder="Search Device/Asset"
                             [(ngModel)]="model"
                             [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
                             [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="name" (typeaheadOnSelect)="deviceSelected($event.item)"
