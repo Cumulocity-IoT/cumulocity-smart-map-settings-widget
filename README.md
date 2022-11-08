@@ -18,6 +18,7 @@ This widget 'Smart map settings' is created using Anuglar Library and can be dep
 *  **Geofences & Smart Rule:** Now User can configure geofences and Smart Rule for geofeces on Map.
 *  **GeoJSON and SVG Support:** User can now also upload GeoJSON and SVG file for floor plan.
 *  **Device Positioning:** Multiple devices can be positioned on the floor plan.
+*  **Supports for Assets:** Device marker and Smart Rules for geofence also supports assets
 
 ## Features
 
