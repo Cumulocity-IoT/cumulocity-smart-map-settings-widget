@@ -7,6 +7,7 @@
         class="form-control"
         placeholder="Search Device/Asset"
         formControlName="device"
+        container="mat-dialog-container"
         [(ngModel)]="model"
         [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
         [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="name" (typeaheadOnSelect)="deviceSelected($event.item)"
