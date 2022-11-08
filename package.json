@@ -1,6 +1,6 @@
 {
   "name": "gp-smart-map-settings",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "The Smart Map Setting widget help user to setup geography, indoor floor plan, svg images, GeoJSOn, Geofences for single/multiple floors. This will be used by Smart Map",
   "author": "Darpankumar Lalani - Software AG, Global Presales",
   "license": "Apache 2.0",
@@ -35,7 +35,7 @@
     "core-js": "^3.15.1",
     "fontawesome": "4.7.2",
     "font-awesome": "^4.7.0",
-    "leaflet2": "npm:leaflet@^1.6.0",
+    "leaflet2": "npm:leaflet@1.7.1",
     "leaflet-draw": "^1.0.4",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",

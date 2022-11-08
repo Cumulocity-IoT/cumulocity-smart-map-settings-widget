@@ -145,9 +145,9 @@ export class Commonc8yService {
             currentPage: pageToGet
         };
         if (searchName) {
-            inventoryFilter['query'] = `$filter=(has(c8y_IsDevice) and (name eq '${this.generateRegEx(searchName)}'))`;
+            inventoryFilter['query'] = `$filter=((has(c8y_IsDevice) or has(c8y_IsAsset)) and (name eq '${this.generateRegEx(searchName)}'))`;
         } else {
-            inventoryFilter['query'] = `$filter=(has(c8y_IsDevice))`;
+            inventoryFilter['query'] = `$filter=(has(c8y_IsDevice) has(c8y_IsAsset))`;
         }
         return new Promise(
             (resolve, reject) => {
