@@ -77,7 +77,7 @@ This widget 'Smart map settings' is created using Angular Library and can be dep
     npm i <binary file path>/gp-smart-map-settings-*.*.*.tgz
 	```
 
-4. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/2.0.1/smart-map.css) and paste it at  /cumulocity-app-builder/ui-assets/
+4. Copy smart-map.css file [from here](https://github.com/SoftwareAG/cumulocity-smart-map-settings-widget/releases/download/2.0.2/smart-map.css) and paste it at  /cumulocity-app-builder/ui-assets/
 
     **Note:** Ignore this step is already done as part Smart-Map Installation. 
 
