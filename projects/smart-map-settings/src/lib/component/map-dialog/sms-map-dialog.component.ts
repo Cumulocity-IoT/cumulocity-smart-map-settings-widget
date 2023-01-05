@@ -110,7 +110,7 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
         @Inject(MAT_DIALOG_DATA) data
          ) { this.input = data; }
 
-    ngOnInit(): void {
+   async ngOnInit(): Promise<void> {
         this.componentCount = 0;
         this.editedBuildingConfig = {};
         this.devicesUntouched = [];
@@ -122,7 +122,7 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
         this.isLocationSearchActvie = this.locationSearchAPI.isSearchDisplay();
         this.suggestions$ = new Observable((observer: Observer<any>) => {
             this.locationSearchAPI.searchGeoLocation(this.value).subscribe((res:any) => {
-                console.log(res);
+                res = res.results[0].locations;
                 observer.next(res);
             });
             
@@ -146,15 +146,16 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
     changeTypeaheadLoading(e: boolean): void {
         this.isLoading = e;
     }
+
     /**
      * Change map coordinates based on location search API output
      */
     displayFn(searchResult: any) {
         if (searchResult) {
-            const latlng = L.latLng(searchResult[this.locationSearchAPI.getLatField()], searchResult[this.locationSearchAPI.getLngField()]);
+            const latlng = L.latLng(searchResult.displayLatLng[this.locationSearchAPI.getLatField()], searchResult.displayLatLng[this.locationSearchAPI.getLngField()]);
             const myBounds1 = new L.LatLngBounds(latlng, latlng);
             this.map.flyToBounds(myBounds1, { animate: true, maxZoom: 14});
-            return searchResult.display_name;
+            return searchResult.adminArea5;
         }
     }
 

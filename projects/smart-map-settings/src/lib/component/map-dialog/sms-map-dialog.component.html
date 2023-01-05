@@ -11,7 +11,7 @@
       placeholder="Search your location"
       [(ngModel)]="value"
       [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
-      [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="display_name" (typeaheadOnSelect)="onSelect($event)"
+      [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="adminArea5" (typeaheadOnSelect)="onSelect($event)"
       [isAnimated]="true" autocomplete="off" [typeaheadOptionsLimit]="5"  [typeaheadMinLength]="3"
     />
       <span class="input-group-addon">
