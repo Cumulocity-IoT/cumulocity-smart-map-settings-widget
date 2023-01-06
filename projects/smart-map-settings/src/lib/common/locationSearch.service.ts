@@ -19,12 +19,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-@Injectable()
+@Injectable({providedIn:'root'})
 export class LocationSearchService {
     private latField: any = '';
     private lngField: any = '';
     private locationSearchAPI: String = '';
-    constructor(private http: HttpClient) {}
+    constructor() {}
 
     /**
      * Set Location Search API settings from configuraiton
@@ -42,8 +42,8 @@ export class LocationSearchService {
     /**
      * Search Geo Loaction based on given search text
      */
-    searchGeoLocation(searchText) {
-        return this.http.get(this.locationSearchAPI + searchText);
+    searchGeoLocationURL(searchText) {
+        return (this.locationSearchAPI + searchText);
     }
 
     getLatField() {

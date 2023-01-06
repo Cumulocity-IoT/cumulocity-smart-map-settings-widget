@@ -21,13 +21,13 @@ import { WidgetConfig, ConfigCoordinates, BuildingConfig } from '../../common/in
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatSort} from '@angular/material/sort';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import { GPSmsMapDialogComponent } from '../map-dialog/sms-map-dialog.component';
 import { FetchClient, IFetchOptions } from '@c8y/client';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { AlertService, Alert } from '@c8y/ngx-components';
 import { LocationSearchService } from '../../common/locationSearch.service';
 import { GPDeleteConfirmComponent } from '../delete-confirm-popup/sms-delete-confirm.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
     // tslint:disable-next-line: component-selector
@@ -47,7 +47,7 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     floorCooridnates = [];
     dataSource = new MatTableDataSource<WidgetConfig>([]);
     isBusy  = false;
-    dialogConfig = new MatDialogConfig();
+    dialogConfig = null;
      @ViewChild(MatSort, {static: true})
     set sort(v: MatSort) { this.dataSource.sort = v; }
     displayedColumns: string[] = ['id', 'name', 'assetType', 'location', 'floorsAvailable', 'delete', 'edit'];
@@ -62,7 +62,7 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     }
     constructor(
         private cmonSvc: Commonc8yService,
-        private dialog: MatDialog,
+        private modalService: BsModalService,
         private alert: AlertService,
         private commonc8yService: Commonc8yService,
         private locationSearchService: LocationSearchService,
@@ -73,9 +73,9 @@ export class GPFloorPlanSettingsComponent implements OnInit {
         if (this._config && this._config.geoSearchAPI && this._config.latField && this._config.lngField) {
             this.locationSearchService.setSearchSettings(this._config.geoSearchAPI, this._config.latField, this._config.lngField);
         }
-        this.dialogConfig.disableClose = true;
+       /*  this.dialogConfig.disableClose = true;
         this.dialogConfig.autoFocus = true;
-        this.dialogConfig.width = '70%';
+        this.dialogConfig.width = '70%'; */
         this.loadFloorData();
     }
 
@@ -126,13 +126,11 @@ export class GPFloorPlanSettingsComponent implements OnInit {
      * Confirmation dialog for deleting geography
      */
     deleteDialog(row): void {
-        const dialogRef = this.dialog.open(GPDeleteConfirmComponent, {
-            data: { record: row }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.deleteBuildingData(result);
+        const data = { record: row };
+        const dialogRef = this.showDeleteDialog(data);
+        dialogRef.content.event.subscribe(async result => {
+            if (result && result.isConfirm) {
+                this.deleteBuildingData(data.record);
             }
         });
     }
@@ -179,16 +177,15 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     /**
      * Open Model Dialog for editing geography information
      */
-    editBuildingConfig(row): void {
-        this.dialogConfig.data = {
+    async editBuildingConfig(row) {
+        let data = {
             title: 'Geography Settings',
             draw: true,
             edit: true,
             data: row
         };
-        const dialogRef = this.dialog.open(GPSmsMapDialogComponent, this.dialogConfig);
-
-        dialogRef.afterClosed().subscribe(result => {
+        const mapDialogRef = this.showMapDialog(data);
+        await mapDialogRef.content.event.subscribe(async result => {
             if (result && result.length > 0) {
                 this.alert.add({
                     text: 'Edited successfuly',
@@ -202,16 +199,14 @@ export class GPFloorPlanSettingsComponent implements OnInit {
     /**
      * Open Model Dialog for adding geography information
      */
-      openDialog(): void {
-        this.dialogConfig.data = {
+      async openDialog(): Promise<void> {
+        let data = {
             title: 'Geography Settings',
             draw: true,
             edit: false
         };
-        const dialogRef = this.dialog.open(GPSmsMapDialogComponent, this.dialogConfig);
-
-        dialogRef.afterClosed().subscribe(result => {
-
+        const mapDialogRef = this.showMapDialog(data);
+        await mapDialogRef.content.event.subscribe(async result => {
             if (result && result.length > 0) {
                 this.alert.add({
                     text: 'Added successfuly',
@@ -220,5 +215,12 @@ export class GPFloorPlanSettingsComponent implements OnInit {
                 this.loadFloorData();
             }
         });
+    }
+
+    private showMapDialog(data: any): BsModalRef {
+        return this.modalService.show(GPSmsMapDialogComponent, { class: 'modal-lg', initialState: { input: data }});
+    }
+    private showDeleteDialog(data: any): BsModalRef {
+        return this.modalService.show(GPDeleteConfirmComponent, { class: 'modal-sm', initialState: { input: data }});
     }
 }

@@ -16,8 +16,8 @@
  * limitations under the License.
  */
 
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 export interface ConfrimData {
     isConfirm?: false;
@@ -30,13 +30,18 @@ export interface ConfrimData {
     templateUrl: 'sms-delete-confirm.component.html',
 })
 export class GPDeleteConfirmComponent {
-
+    input: any;
+    public event: EventEmitter<any> = new EventEmitter();
     constructor(
-        public dialogRef: MatDialogRef<GPDeleteConfirmComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: ConfrimData) { }
+        public bsModalRef: BsModalRef) { }
 
-    onNoClick(): void {
-        this.dialogRef.close();
+    deleteAction() {
+        this.event.emit({isConfirm: true});
+        this.bsModalRef.hide();
+    }
+    dismiss() {
+        this.event.emit(false);
+        this.bsModalRef.hide();
     }
 
 }

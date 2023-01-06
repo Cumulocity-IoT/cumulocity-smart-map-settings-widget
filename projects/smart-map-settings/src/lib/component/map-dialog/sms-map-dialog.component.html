@@ -1,35 +1,42 @@
-<div class="header-container">
-  <div class="">
-    <h1 mat-dialog-title>{{ input.title }}</h1>
-  </div>
-
-  <div class="sms-filter-panel" *ngIf="isLocationSearchActvie">
-   <div id="searchLocation" class="input-group input-group-search">
-    <input
-      type="search"
-      class="form-control"
-      placeholder="Search your location"
-      [(ngModel)]="value"
-      [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
-      [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="adminArea5" (typeaheadOnSelect)="onSelect($event)"
-      [isAnimated]="true" autocomplete="off" [typeaheadOptionsLimit]="5"  [typeaheadMinLength]="3"
-    />
-      <span class="input-group-addon">
-        <i c8yIcon="search" *ngIf="!value || value.length === 0"></i>
-        <i
-        c8yIcon="times"
-        class="text-muted"
-        *ngIf="value && value.length > 0"
-        (click)="value = ''"
-      ></i>
-      </span>
+<div class="">
+  <div class="row modal-content" uib-modal-transclude="">
+    <div class="modal-header row col-sm-12 col-xs-12">
+      <div class="col-sm-6 col-xs-6 ">
+        <h3>
+          <span translate="">{{ input.title }}</span>
+        </h3>
+      </div>
+      <div class="col-sm-6 col-xs-6 sms-filter-panel pull-right" *ngIf="isLocationSearchActvie">
+        <div id="searchLocation" class="input-group input-group-search">
+         <input
+           type="search"
+           class="form-control"
+           placeholder="Search your location"
+           [(ngModel)]="value"
+           [typeahead]="suggestions$"  (typeaheadLoading)="changeTypeaheadLoading($event)"
+           [typeaheadAsync]="true" typeaheadWaitMs="500" typeaheadOptionField="adminArea5" (typeaheadOnSelect)="onSelect($event)"
+           [isAnimated]="true" autocomplete="off" [typeaheadOptionsLimit]="5"  [typeaheadMinLength]="3"
+         />
+           <span class="input-group-addon">
+             <i c8yIcon="search" *ngIf="!value || value.length === 0"></i>
+             <i
+             c8yIcon="times"
+             class="text-muted"
+             *ngIf="value && value.length > 0"
+             (click)="value = ''"
+           ></i>
+           </span>
+         </div>
+         <div *ngIf="isLoading" style="color:blue;margin: 5px;"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+       </div>
     </div>
-    <div *ngIf="isLoading" style="color:blue;margin: 5px;"><i class="fa fa-circle-o-notch fa-spin"></i></div>
+    <div class="modal-body  row col-sm-12 col-xs-12">
+      <div  id="map" style="overflow: hidden;">
+      </div>
+    </div>
+    <div class="modal-footer  row col-sm-12 col-xs-12">
+      <button class="btn btn-default" (click)="dismiss()"  >Cancel</button>
+       <button class="btn btn-primary" (click)="saveFloorPlan()" cdkFocusInitial>Save</button>
+    </div>
   </div>
-</div>
-<div mat-dialog-content id="map" style="overflow: hidden;">
-</div>
-<div mat-dialog-actions style="float: right;">
-  <button class="btn btn-default" [mat-dialog-close]=""  >Cancel</button>
-  <button class="btn btn-primary" (click)="saveFloorPlan()" cdkFocusInitial>Save</button>
 </div>

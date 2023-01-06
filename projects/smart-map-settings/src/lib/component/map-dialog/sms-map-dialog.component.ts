@@ -16,10 +16,9 @@
  * limitations under the License.
  */
 
-import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Component, OnInit, isDevMode, AfterViewInit,
      ComponentFactoryResolver, Injector, ApplicationRef,
-     NgZone, ComponentRef, Input, Inject, OnDestroy } from '@angular/core';
+     NgZone, ComponentRef, OnDestroy, EventEmitter } from '@angular/core';
 import { BuildingConfig, GeofenceConfig } from '../../common/interfaces/widgetConfig.interface';
 import { BuildingEntryPopupComponent } from '../building-entry-popup/sms-building-entry-popup.component';
 import { Subscription } from 'rxjs/internal/Subscription';
@@ -38,18 +37,18 @@ import 'leaflet-draw';
 import { MarkerDetailPopupComponent } from '../marker-detail-popup/sms-marker-detail-popup.component';
 import { GeofenceDetailPopupComponent } from '../geofence-detail-popup/sms-geofence-detail-popup.component';
 import { FormControl } from '@angular/forms';
-import { debounceTime, tap, switchMap, finalize } from 'rxjs/operators';
 import { LocationSearchService } from '../../common/locationSearch.service';
 import { ImageRotateService } from '../../common/imageRotate.service';
 import * as MarkerImage from '../../common/marker-icon';
 import { TypeaheadMatch } from 'ngx-bootstrap/typeahead';
 import { Observable, Observer } from 'rxjs';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 export interface GPSettingsDialogInterface {
     edit ?: boolean;
     preview ?: boolean;
     data ?: any;
     draw ?: boolean;
-    title: String;
+    title?: String;
 }
 @Component({
     // tslint:disable-next-line: component-selector
@@ -59,7 +58,7 @@ export interface GPSettingsDialogInterface {
 })
 export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit {
 
-    @Input() input: GPSettingsDialogInterface;
+    input: GPSettingsDialogInterface;
     editedBuildingConfig: BuildingConfig;
     formData: FormData;
     componentCount: number;
@@ -98,17 +97,17 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
         opacity: 1,
         weight: 2,
     };
+    public event: EventEmitter<any> = new EventEmitter();
     constructor(
         private zone: NgZone,
+        public bsModalRef: BsModalRef,
         private resolver: ComponentFactoryResolver,
-        public dialogRef: MatDialogRef<GPSmsMapDialogComponent>,
         private commonc8yService: Commonc8yService,
         private injector: Injector,
         private appRef: ApplicationRef,
         private locationSearchAPI: LocationSearchService,
         private imageRotateService: ImageRotateService,
-        @Inject(MAT_DIALOG_DATA) data
-         ) { this.input = data; }
+       ) { }
 
    async ngOnInit(): Promise<void> {
         this.componentCount = 0;
@@ -121,7 +120,9 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
 
         this.isLocationSearchActvie = this.locationSearchAPI.isSearchDisplay();
         this.suggestions$ = new Observable((observer: Observer<any>) => {
-            this.locationSearchAPI.searchGeoLocation(this.value).subscribe((res:any) => {
+            fetch(this.locationSearchAPI.searchGeoLocationURL(this.value))
+            .then((response) => response.json())
+           .then((res:any) => {
                 res = res.results[0].locations;
                 observer.next(res);
             });
@@ -260,7 +261,8 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
     /**
      * THis menthod is used to load map and initialzie drawing tool bar
      */
-    ngAfterViewInit(): void {
+    async ngAfterViewInit() {
+        await new Promise(resolve => setTimeout(resolve, 500));
         this.openMap();
         this.addOSMLayer();
         this.imageRotateService.initialize(L);
@@ -832,9 +834,11 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
                         corners: this.img.getImageBound()
                     };
                 }
-                this.dialogRef.close({imageDetails: this.imageDetails,
+               
+               this.event.emit({imageDetails: this.imageDetails,
                     markers: { added: markers, unchanged: this.devicesUntouched, deleted: this.deviceMarkedForDelete},
                     geofences: { added: geofences, unchanged: this.geofencesUntouched, deleted: this.geofencesMarkedForDelete }});
+               this.bsModalRef.hide();
             });
        } else {
 
@@ -865,9 +869,15 @@ export class GPSmsMapDialogComponent implements OnInit, OnDestroy, AfterViewInit
             }
 
             Promise.all(promArr).then(() => {
-                this.dialogRef.close(promArr);
+                this.event.emit(promArr);
+                this.bsModalRef.hide();
                 this.map.off('draw:created');
             }).catch((e) => console.log(e));
         }
       }
+      
+      dismiss() {
+        this.event.emit(false);
+        this.bsModalRef.hide();
+    }
 }

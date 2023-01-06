@@ -17,7 +17,6 @@
  */
 
 import { OnInit, Component, Input, Inject, ViewChild, isDevMode, Output, EventEmitter } from '@angular/core';
-import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import { Commonc8yService } from '../../common/c8y/commonc8y.service';
@@ -28,6 +27,7 @@ import { AlertService, Alert } from '@c8y/ngx-components';
 
 import { FormBuilder, Validators } from '@angular/forms';
 import { SmartRuleConfig } from '../../common/interfaces/widgetConfig.interface';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 @Component({
     // tslint:disable-next-line: component-selector
     selector: 'lib-sms-floor-plan',
@@ -46,7 +46,6 @@ export class GPFloorDialogComponent implements OnInit {
     level: number;
     tableColumns: string[] = ['level', 'status', 'preview', 'edit', 'delete', 'revert'];
     dataSource: any;
-    dialogConfig = new MatDialogConfig();
     floorAddConfigForm;
     floorEditConfigForm;
     smartRulesForDelete: SmartRuleConfig[] = [];
@@ -59,7 +58,7 @@ export class GPFloorDialogComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private commonc8yService: Commonc8yService,
-        private dialog: MatDialog,
+        private modalService: BsModalService,
         private alert: AlertService,
         private fetchClient: FetchClient,
         private http: HttpClient,
@@ -74,9 +73,6 @@ export class GPFloorDialogComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.input.levels);
         this.dataSource.sort = this.sort;
         if (isDevMode()) {console.log(this.input); }
-        this.dialogConfig.disableClose = true;
-        this.dialogConfig.autoFocus = true;
-        this.dialogConfig.width = '70%';
         this.coordinates = this.input.coordinates;
         this.error = false;
     }
@@ -205,14 +201,13 @@ export class GPFloorDialogComponent implements OnInit {
      */
     previewFloor(data): void {
         // this.sampleSmartRule();
-        this.dialogConfig.data = {
+        const dataObject = {
             title: 'Geography View',
             preview: true,
             data: data
         };
-        const dialogRef = this.dialog.open(GPSmsMapDialogComponent, this.dialogConfig);
-
-        dialogRef.afterClosed().subscribe(result => {
+        const dialogRef = this.showMapDialog(dataObject);
+        dialogRef.content.event.subscribe(result => {
             if (isDevMode()) {console.log(result); }
             const eI = this.dataSource.data;
             const ind = this.addedFloors.findIndex((f) => {
@@ -612,5 +607,9 @@ export class GPFloorDialogComponent implements OnInit {
             smartRuleConfig.smartRuleId = response.id;
         }
         return geofence;
+    }
+
+    private showMapDialog(data: any): BsModalRef {
+        return this.modalService.show(GPSmsMapDialogComponent, { class: 'modal-lg', initialState: { input: data }});
     }
 }

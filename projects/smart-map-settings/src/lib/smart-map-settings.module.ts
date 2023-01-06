@@ -25,8 +25,6 @@ import { GPFloorPlanSettingsConfigComponent } from './component/config/gp-smart-
 
 
 import { MatTableModule } from '@angular/material/table';
-import { MatDialogModule } from '@angular/material/dialog';
-
 import { GPSmsMapDialogComponent } from './component/map-dialog/sms-map-dialog.component';
 import { BuildingEntryPopupComponent } from './component/building-entry-popup/sms-building-entry-popup.component';
 import { GPFloorDialogComponent } from './component/floor-plan/sms-floor-plan.component';
@@ -39,6 +37,7 @@ import { GPDeleteConfirmComponent } from './component/delete-confirm-popup/sms-d
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { CommonModule } from '@angular/common';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [ BuildingEntryPopupComponent, MarkerDetailPopupComponent, GeofenceDetailPopupComponent,
@@ -49,8 +48,8 @@ import { CommonModule } from '@angular/common';
     CoreModule,
     TypeaheadModule.forRoot(),
     PopoverModule.forRoot(),
+    ModalModule.forRoot(),
     MatTableModule,
-    MatDialogModule,
     FormsModule,
     ReactiveFormsModule,
   ],

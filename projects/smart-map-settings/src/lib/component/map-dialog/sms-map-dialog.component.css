@@ -39,4 +39,5 @@
 }
 ::ng-deep .dropdown-menu {
   width: 300px !important;
+  z-index: 1060 !important;
 }
